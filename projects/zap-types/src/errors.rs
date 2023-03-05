@@ -1,6 +1,6 @@
 #[derive(Debug, Copy, Clone)]
-pub enum Error {
+pub enum ZapError {
     UnknownError
 }
 
-pub type Result<T> = std::result::Result<T, Error>;
+pub type ZapResult<T> = std::result::Result<T, ZapError>;
