@@ -13,6 +13,8 @@ edition = "2021"
 [dependencies]
 zstd = "0.12.3+zstd.1.5.2"
 rayon = "1.7.0"
+zip = "0.6.4"
+zipfs = "0.1.0"
 
 [dev-dependencies]
 

@@ -1,8 +1,7 @@
-Rust Template Project
-=====================
+Z Standard File System(ZSFS)
+============================
 
-Rust template project for monorepo
-
+A file system built on Zstandard compression algorithm.
 
 ```
 | 4K head | 4K * n data block |

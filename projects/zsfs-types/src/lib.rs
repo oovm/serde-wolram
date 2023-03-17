@@ -1,32 +1,28 @@
 use std::io::{Read, Write};
+use std::path::Path;
 
 pub use crate::errors::{ZapError, ZapResult};
 
 mod errors;
+mod meta_block;
+pub use crate::meta_block::SuperBlock;
 
 pub struct Zap {}
 
-#[repr(u8)]
-#[derive(Debug, Copy, Clone)]
-pub enum CompressionMethod {
-    Nothing,
+pub struct ZfsMount {
+    meta: SuperBlock,
 }
 
-pub struct SuperBlock {
-    pub magic: [u8; 4],
-    pub block_size: u32,
-    pub modified_at: Option<u64>,
-    pub last_mounted_at: Option<u64>,
-    pub block_count: u32,
-    pub inode_count: u32,
-    pub free_blocks: u32,
-    pub free_inodes: u32,
-    pub groups: u32,
-    pub data_blocks_per_group: u32,
-    pub uid: u32,
-    pub gid: u32,
-    pub checksum: u32,
+impl ZfsMount {
+    /// a.number.zs/zfs/zsfs
+    pub fn new<P: AsRef<Path>>(path: P) -> Self {
+        Self {
+
+        }
+    }
 }
+
+
 
 /// A block of data which is a multiple of 4k
 pub struct ZapBlock {
@@ -36,11 +32,11 @@ pub struct ZapBlock {
     pub direct_blocks: [u32; DIRECT_POINTERS as usize],
     pub indirect_block: u32,
     pub double_indirect_block: u32,
-    pub checksum: u32,
+    pub crc32: u32,
 }
 
 pub struct Metadata {
-    pub compression_method: CompressionMethod,
+    pub compression_level: u8,
 }
 
 impl Zap {
